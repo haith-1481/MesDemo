@@ -15,6 +15,9 @@
 		2CADB82622A600380044DC16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CADB82422A600380044DC16 /* LaunchScreen.storyboard */; };
 		2CADB83122A600380044DC16 /* MesDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CADB83022A600380044DC16 /* MesDemoTests.swift */; };
 		2CADB83C22A600380044DC16 /* MesDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CADB83B22A600380044DC16 /* MesDemoUITests.swift */; };
+		2CADB84A22A6020A0044DC16 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CADB84922A6020A0044DC16 /* MessageModel.swift */; };
+		2CADB84C22A605580044DC16 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CADB84B22A605580044DC16 /* MessageTableViewCell.swift */; };
+		2CADB85022A6073B0044DC16 /* BubbleChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CADB84F22A6073B0044DC16 /* BubbleChatView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		2CADB83722A600380044DC16 /* MesDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MesDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CADB83B22A600380044DC16 /* MesDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MesDemoUITests.swift; sourceTree = "<group>"; };
 		2CADB83D22A600380044DC16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2CADB84922A6020A0044DC16 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		2CADB84B22A605580044DC16 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		2CADB84F22A6073B0044DC16 /* BubbleChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleChatView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +112,9 @@
 				2CADB82422A600380044DC16 /* LaunchScreen.storyboard */,
 				2CADB82722A600380044DC16 /* Info.plist */,
 				2CADB81F22A600330044DC16 /* MesDemo.xcdatamodeld */,
+				2CADB84922A6020A0044DC16 /* MessageModel.swift */,
+				2CADB84B22A605580044DC16 /* MessageTableViewCell.swift */,
+				2CADB84F22A6073B0044DC16 /* BubbleChatView.swift */,
 			);
 			path = MesDemo;
 			sourceTree = "<group>";
@@ -259,9 +268,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CADB85022A6073B0044DC16 /* BubbleChatView.swift in Sources */,
 				2CADB81B22A600330044DC16 /* ViewController.swift in Sources */,
 				2CADB81922A600330044DC16 /* AppDelegate.swift in Sources */,
 				2CADB82122A600330044DC16 /* MesDemo.xcdatamodeld in Sources */,
+				2CADB84C22A605580044DC16 /* MessageTableViewCell.swift in Sources */,
+				2CADB84A22A6020A0044DC16 /* MessageModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
