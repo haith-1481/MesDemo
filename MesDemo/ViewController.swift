@@ -14,7 +14,26 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var sendButton: UIButton!
+
+    @IBAction func textFieldTracking(_ sender: UITextField) {
+        if let text = textField.text, !text.isEmpty {
+            sendButton.isEnabled = true
+        } else {
+            sendButton.isEnabled = false
+        }
+    }
     @IBAction func sendAction(_ sender: Any) {
+        let rand = Int.random(in: 1...2)
+        var sender = true
+        if rand == 2 { sender = false }
+        let newMessage = Message(content: textField.text!, sender: sender, attachment: nil, date: Date())
+        messageArray.append(newMessage)
+        textField.text = ""
+        tableView.beginUpdates()
+        tableView.insertRows(at: [IndexPath(row: messageArray.count - 1, section: 0)], with: .automatic)
+        tableView.endUpdates()
+        tableView.scrollToRow(at: IndexPath(item: messageArray.count-1, section: 0), at: .bottom, animated: true)
 
     }
 

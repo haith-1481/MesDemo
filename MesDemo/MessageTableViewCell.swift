@@ -21,11 +21,9 @@ class MessageTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    private func setup() {
+    func setup() {
         bubbleImageView = UIImageView(image: #imageLiteral(resourceName: "bubble1"), highlightedImage: #imageLiteral(resourceName: "bubble1"))
         bubbleImageView.isUserInteractionEnabled = true
-
-//        messageLabel = UILabel(frame: self)
         messageLabel.font = UIFont.systemFont(ofSize: 15)
         messageLabel.numberOfLines = 0
         messageLabel.isUserInteractionEnabled = true
@@ -34,14 +32,32 @@ class MessageTableViewCell: UITableViewCell {
         bubbleImageView.addSubview(messageLabel)
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         bubbleImageView.translatesAutoresizingMaskIntoConstraints = false
+        messageLabel.preferredMaxLayoutWidth = 218
+        messageLabel.setContentHuggingPriority(UILayoutPriority.required, for:.horizontal)
 
         contentView.addConstraint(NSLayoutConstraint(item: bubbleImageView, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top, multiplier: 1, constant: 4.5))
         contentView.addConstraint(NSLayoutConstraint(item: bubbleImageView, attribute: .bottom, relatedBy: .equal, toItem: contentView, attribute: .bottom, multiplier: 1, constant: -4.5))
+
         bubbleImageView.addConstraint(NSLayoutConstraint(item: bubbleImageView, attribute: .width, relatedBy: .equal, toItem: messageLabel, attribute: .width, multiplier: 1, constant: 50))
         bubbleImageView.addConstraint(NSLayoutConstraint(item: messageLabel, attribute: .centerX, relatedBy: .equal, toItem: bubbleImageView, attribute: .centerX, multiplier: 1, constant: -0.5))
         bubbleImageView.addConstraint(NSLayoutConstraint(item: messageLabel, attribute: .centerY, relatedBy: .equal, toItem: bubbleImageView, attribute: .centerY, multiplier: 1, constant: -0.5))
-        messageLabel.preferredMaxLayoutWidth = 218
         bubbleImageView.addConstraint(NSLayoutConstraint(item: messageLabel, attribute: .height, relatedBy: .equal, toItem: bubbleImageView, attribute: .height, multiplier: 1, constant: -15))
+
+//        let widthConstraint = NSLayoutConstraint(item: bubbleImageView, attribute: .width, relatedBy: .equal, toItem: messageLabel, attribute: .width, multiplier: 1, constant: 50)
+//        widthConstraint.priority = .required
+//        widthConstraint.isActive = true
+
+
+
+//        NSLayoutConstraint.activate([
+//            contentView.topAnchor.constraint(equalTo: bubbleImageView.topAnchor, constant: 4.5),
+//            contentView.bottomAnchor.constraint(equalTo: bubbleImageView.bottomAnchor, constant: -4.5),
+//
+//            bubbleImageView.widthAnchor.constraint(equalTo: messageLabel.widthAnchor, constant: 50),
+//            bubbleImageView.heightAnchor.constraint(equalTo: messageLabel.heightAnchor, constant: -15),
+//            bubbleImageView.centerXAnchor.constraint(equalTo: messageLabel.centerXAnchor, constant: -0.5),
+//            bubbleImageView.centerYAnchor.constraint(equalTo: messageLabel.centerYAnchor, constant: -0.5)
+//        ])
     }
 
     func setCell(message: Message) {
@@ -53,16 +69,13 @@ class MessageTableViewCell: UITableViewCell {
             messageLabel.textColor = UIColor.black
             layoutAttribute = .left
             layoutConstant = 50
-        }else{
+        } else {
             bubbleImageView.image = #imageLiteral(resourceName: "bubble")
             messageLabel.textColor = UIColor.white
             layoutAttribute = .right
             layoutConstant = -50
         }
-
+        messageLabel.setContentHuggingPriority(UILayoutPriority.defaultHigh, for:.horizontal)
         contentView.addConstraint(NSLayoutConstraint(item: bubbleImageView, attribute: layoutAttribute, relatedBy: .equal, toItem: contentView, attribute: layoutAttribute, multiplier: 1, constant: layoutConstant))
-
     }
-
-
 }

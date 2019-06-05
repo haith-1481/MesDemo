@@ -19,16 +19,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mne-4E-2xW">
-                                <rect key="frame" x="0.0" y="846" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="836" width="414" height="60"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gfg-Pj-fSa">
-                                        <rect key="frame" x="10" y="10" width="348" height="30"/>
+                                        <rect key="frame" x="10" y="15" width="348" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="textFieldTracking:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="WxM-Ac-zc7"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JXh-ex-ZqB">
-                                        <rect key="frame" x="368" y="10" width="36" height="30"/>
+                                        <rect key="frame" x="368" y="15" width="36" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="36" id="Fr4-6u-E3c"/>
+                                        </constraints>
                                         <state key="normal" title="Send"/>
                                         <connections>
                                             <action selector="sendAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KZz-ni-Qhi"/>
@@ -40,13 +46,13 @@
                                     <constraint firstItem="JXh-ex-ZqB" firstAttribute="leading" secondItem="Gfg-Pj-fSa" secondAttribute="trailing" constant="10" id="JW0-SD-yux"/>
                                     <constraint firstAttribute="trailing" secondItem="JXh-ex-ZqB" secondAttribute="trailing" constant="10" id="WCe-mo-wLM"/>
                                     <constraint firstItem="Gfg-Pj-fSa" firstAttribute="centerY" secondItem="mne-4E-2xW" secondAttribute="centerY" id="h5L-uQ-G6V"/>
-                                    <constraint firstAttribute="height" constant="50" id="rRU-CB-YkH"/>
+                                    <constraint firstAttribute="height" constant="60" id="rRU-CB-YkH"/>
                                     <constraint firstItem="Gfg-Pj-fSa" firstAttribute="leading" secondItem="mne-4E-2xW" secondAttribute="leading" constant="10" id="rci-By-UiK"/>
                                     <constraint firstItem="JXh-ex-ZqB" firstAttribute="centerY" secondItem="mne-4E-2xW" secondAttribute="centerY" id="ttM-VJ-zbM"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sRY-fF-lek">
-                                <rect key="frame" x="0.0" y="88" width="414" height="758"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="748"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageTableViewCell" rowHeight="119" id="Xf9-1B-NPx" customClass="MessageTableViewCell" customModule="MesDemo" customModuleProvider="target">
@@ -93,6 +99,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="lCp-3P-HHy"/>
                     <connections>
+                        <outlet property="sendButton" destination="JXh-ex-ZqB" id="GQk-QF-go4"/>
                         <outlet property="tableView" destination="sRY-fF-lek" id="9Jg-pU-7rA"/>
                         <outlet property="textField" destination="Gfg-Pj-fSa" id="L2z-G9-jQp"/>
                     </connections>
