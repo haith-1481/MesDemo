@@ -29,8 +29,21 @@ class ViewController: UIViewController {
         tableView.separatorStyle = .none
         let myMessage = Message(content: "OhioGozaimasu", sender: true, attachment: nil, date: Date())
         let ppMessage = Message(content: "ArigatouGozaimasu", sender: false, attachment: nil, date: Date())
+        let myMessage1 = Message(content: "OhioGozaimasuádafasfavdagadfrawerawfsafsafsafasfasfasfasfasfasfasfas", sender: true, attachment: nil, date: Date())
+        let myMessage2 = Message(content: "OhioGozaimasuasssssssssssssssssssssssssssssssssssssssssssssssssss", sender: true, attachment: nil, date: Date())
+        let myMessage3 = Message(content: "OhioGozaimasu", sender: true, attachment: nil, date: Date())
+        let ppMessage1 = Message(content: "ArigatouGozaimasusfafaaaaaaaaaaaegdfgdfghdfghghagdfgdggdfgdffdhfdghgfdghgdghdfghf", sender: false, attachment: nil, date: Date())
+        let ppMessage2 = Message(content: "ArigatouGozaimasu", sender: false, attachment: nil, date: Date())
         messageArray.append(myMessage)
         messageArray.append(ppMessage)
+
+        messageArray.append(myMessage1)
+        messageArray.append(myMessage2)
+        messageArray.append(myMessage3)
+
+        messageArray.append(ppMessage1)
+        messageArray.append(ppMessage2)
+
     }
 }
 
@@ -41,8 +54,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell") as? MessageTableViewCell else { return UITableViewCell() }
-//        let message = messageData[indexPath.row]
-//        cell.messageView.addSubview(SBubbleChatView(message: message, startY: 0))
+        let message = messageArray[indexPath.row]
+        cell.message = message
+        cell.setCell(message: message)
         return cell
     }
 

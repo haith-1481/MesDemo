@@ -15,18 +15,4 @@ class BubbleChatView: UIImage {
     var backGround: UIImageView?
     var attachment: UIImageView?
 
-    init(message: Message) {
-        let sender = message.sender
-
-    }
-
-    func changeImage(_ name: String) {
-        guard let image = UIImage(named: name) else { return }
-        BubbleChatView.image = image
-            .resizableImage(withCapInsets:
-                UIEdgeInsetsMake(17, 21, 17, 21),
-                            resizingMode: .stretch)
-            .withRenderingMode(.alwaysTemplate)
-    }
-
 }
