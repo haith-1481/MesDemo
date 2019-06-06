@@ -27,7 +27,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
-                                            <action selector="textFieldTracking:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="WxM-Ac-zc7"/>
+                                            <action selector="textFieldEmptyCheck:" destination="BYZ-38-t0r" eventType="editingChanged" id="wDf-On-YWN"/>
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JXh-ex-ZqB">

@@ -32,7 +32,7 @@ class MessageTableViewCell: UITableViewCell {
         bubbleImageView.addSubview(messageLabel)
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         bubbleImageView.translatesAutoresizingMaskIntoConstraints = false
-        messageLabel.preferredMaxLayoutWidth = 218
+        messageLabel.preferredMaxLayoutWidth = 180
         messageLabel.setContentHuggingPriority(UILayoutPriority.required, for:.horizontal)
 
         contentView.addConstraint(NSLayoutConstraint(item: bubbleImageView, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top, multiplier: 1, constant: 4.5))
@@ -43,29 +43,34 @@ class MessageTableViewCell: UITableViewCell {
         bubbleImageView.addConstraint(NSLayoutConstraint(item: messageLabel, attribute: .centerY, relatedBy: .equal, toItem: bubbleImageView, attribute: .centerY, multiplier: 1, constant: -0.5))
         bubbleImageView.addConstraint(NSLayoutConstraint(item: messageLabel, attribute: .height, relatedBy: .equal, toItem: bubbleImageView, attribute: .height, multiplier: 1, constant: -15))
 
-//        let widthConstraint = NSLayoutConstraint(item: bubbleImageView, attribute: .width, relatedBy: .equal, toItem: messageLabel, attribute: .width, multiplier: 1, constant: 50)
-//        widthConstraint.priority = .required
-//        widthConstraint.isActive = true
-
     }
 
     func setCell(message: Message) {
         messageLabel.text = message.content
         var layoutAttribute: NSLayoutConstraint.Attribute
         var layoutConstant: CGFloat
+        var maxLayoutAttribute: NSLayoutConstraint.Attribute
+        var maxLayoutConstant: CGFloat
         if message.sender {
             changeImage("bubble1") //sent
             messageLabel.textColor = UIColor.black
             layoutAttribute = .left
+            maxLayoutAttribute = .right
             layoutConstant = 50
+            maxLayoutConstant = -100
         } else {
             changeImage("bubble") //receive
             messageLabel.textColor = UIColor.white
             layoutAttribute = .right
+            maxLayoutAttribute = .left
             layoutConstant = -50
+            maxLayoutConstant = 100
         }
         contentView.addConstraint(NSLayoutConstraint(item: bubbleImageView, attribute: layoutAttribute, relatedBy: .equal, toItem: contentView, attribute: layoutAttribute, multiplier: 1, constant: layoutConstant))
         messageLabel.setContentHuggingPriority(UILayoutPriority.defaultHigh, for:.horizontal)
+        let widthConstraint = NSLayoutConstraint(item: bubbleImageView, attribute: maxLayoutAttribute, relatedBy: .equal, toItem: contentView, attribute: maxLayoutAttribute, multiplier: 1, constant: maxLayoutConstant)
+        widthConstraint.priority = UILayoutPriority(rawValue: 100)
+        widthConstraint.isActive = true
     }
 
     func changeImage(_ name: String) {
