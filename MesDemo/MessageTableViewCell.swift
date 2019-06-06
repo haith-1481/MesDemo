@@ -47,17 +47,6 @@ class MessageTableViewCell: UITableViewCell {
 //        widthConstraint.priority = .required
 //        widthConstraint.isActive = true
 
-
-
-//        NSLayoutConstraint.activate([
-//            contentView.topAnchor.constraint(equalTo: bubbleImageView.topAnchor, constant: 4.5),
-//            contentView.bottomAnchor.constraint(equalTo: bubbleImageView.bottomAnchor, constant: -4.5),
-//
-//            bubbleImageView.widthAnchor.constraint(equalTo: messageLabel.widthAnchor, constant: 50),
-//            bubbleImageView.heightAnchor.constraint(equalTo: messageLabel.heightAnchor, constant: -15),
-//            bubbleImageView.centerXAnchor.constraint(equalTo: messageLabel.centerXAnchor, constant: -0.5),
-//            bubbleImageView.centerYAnchor.constraint(equalTo: messageLabel.centerYAnchor, constant: -0.5)
-//        ])
     }
 
     func setCell(message: Message) {
@@ -65,17 +54,25 @@ class MessageTableViewCell: UITableViewCell {
         var layoutAttribute: NSLayoutConstraint.Attribute
         var layoutConstant: CGFloat
         if message.sender {
-            bubbleImageView.image = #imageLiteral(resourceName: "bubble1")
+            changeImage("bubble1") //sent
             messageLabel.textColor = UIColor.black
             layoutAttribute = .left
             layoutConstant = 50
         } else {
-            bubbleImageView.image = #imageLiteral(resourceName: "bubble")
+            changeImage("bubble") //receive
             messageLabel.textColor = UIColor.white
             layoutAttribute = .right
             layoutConstant = -50
         }
-        messageLabel.setContentHuggingPriority(UILayoutPriority.defaultHigh, for:.horizontal)
         contentView.addConstraint(NSLayoutConstraint(item: bubbleImageView, attribute: layoutAttribute, relatedBy: .equal, toItem: contentView, attribute: layoutAttribute, multiplier: 1, constant: layoutConstant))
+        messageLabel.setContentHuggingPriority(UILayoutPriority.defaultHigh, for:.horizontal)
     }
+
+    func changeImage(_ name: String) {
+        guard let image = UIImage(named: name) else { return }
+        bubbleImageView.image = image
+               .resizableImage(withCapInsets:
+                                UIEdgeInsets(top: 17, left: 30, bottom: 17, right: 30),
+                                resizingMode: .stretch)
+     }
 }
