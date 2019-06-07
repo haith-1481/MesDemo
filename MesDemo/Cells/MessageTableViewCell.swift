@@ -51,7 +51,7 @@ class MessageTableViewCell: UITableViewCell {
         var layoutConstant: CGFloat
         var maxLayoutAttribute: NSLayoutConstraint.Attribute
         var maxLayoutConstant: CGFloat
-        if message.sender {
+        if message.sender == .friend {
             changeImage("bubble1") //sent
             messageLabel.textColor = UIColor.black
             layoutAttribute = .left

@@ -26,18 +26,21 @@ class ViewController: UIViewController {
 
     @IBAction func sendAction(_ sender: Any) {
         let rand = Int.random(in: 1...2)
-        var sender = true
-        if rand == 2 { sender = false }
+        var sender: Sender = .me
+        if rand == 2 { sender = .friend }
         guard let message = textField.text else { return }
-        let newMessage = Message(content: message, sender: sender, attachment: nil, date: Date())
-        messageArray.append(newMessage)
+        let newMessage = Message(content: message, sender: sender, attachment: nil, date: Date(), position: .alone)
+        let newMess = reposition(newMessage: newMessage)
+        messageArray.append(newMess)
         textField.text = nil
         sendButton.isEnabled = false
+    
         tableView.beginUpdates()
+        tableView.reloadRows(at: [IndexPath(row: messageArray.count - 2, section: 0)], with: UITableView.RowAnimation.none)
         tableView.insertRows(at: [IndexPath(row: messageArray.count - 1, section: 0)], with: .automatic)
         tableView.endUpdates()
-        tableView.scrollToRow(at: IndexPath(item: messageArray.count-1, section: 0), at: .bottom, animated: true)
 
+        tableView.scrollToRow(at: IndexPath(item: messageArray.count-1, section: 0), at: .bottom, animated: true)
     }
 
     override func viewDidLoad() {
@@ -46,18 +49,31 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    func setupTableView() {
+    private func setupTableView() {
         let nib = UINib(nibName: "TableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "TableViewCell")
         tableView.estimatedRowHeight = 100
         tableView.separatorStyle = .none
         sendButton.isEnabled = false
         
-        let myMessage = Message(content: "OhioGozaimasu", sender: true, attachment: nil, date: Date())
-        let ppMessage = Message(content: "ArigatouGozaimasu", sender: false, attachment: nil, date: Date())
+        let myMessage = Message(content: "OhioGozaimasu", sender: .friend, attachment: nil, date: Date(), position: .alone)
+        let ppMessage = Message(content: "ArigatouGozaimasu", sender: .me, attachment: nil, date: Date(), position: .alone)
 
         messageArray.append(myMessage)
         messageArray.append(ppMessage)
+    }
+
+    private func reposition(newMessage: Message) -> Message {
+        guard let lastMess = messageArray.last else { return newMessage }
+        if lastMess.sender == newMessage.sender {
+            if lastMess.position == .alone {
+                messageArray.last?.position = .first
+            } else if lastMess.position == .last {
+                messageArray.last?.position = .mid
+            }
+            newMessage.position = .last
+        }
+        return newMessage
     }
 }
 
@@ -70,7 +86,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell") as? TableViewCell else { return UITableViewCell() }
         let message = messageArray[indexPath.row]
         cell.setup(message: message)
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //Change the selected background view of the cell.
+        tableView.deselectRow(at: indexPath, animated: false)
     }
 
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

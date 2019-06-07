@@ -19,6 +19,7 @@
 		2CADB84C22A605580044DC16 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CADB84B22A605580044DC16 /* MessageTableViewCell.swift */; };
 		2CE7B92522A8AD7A00906D79 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE7B92322A8AD7A00906D79 /* TableViewCell.swift */; };
 		2CE7B92622A8AD7A00906D79 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CE7B92422A8AD7A00906D79 /* TableViewCell.xib */; };
+		2CE7B92F22A9F17B00906D79 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE7B92E22A9F17B00906D79 /* extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		2CADB84B22A605580044DC16 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		2CE7B92322A8AD7A00906D79 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		2CE7B92422A8AD7A00906D79 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		2CE7B92E22A9F17B00906D79 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,8 +110,9 @@
 			isa = PBXGroup;
 			children = (
 				2CE7B92A22A8C46100906D79 /* Model */,
-				2CADB81A22A600330044DC16 /* ViewController.swift */,
+				2CE7B93022A9F18900906D79 /* Ults */,
 				2CE7B92C22A8C47900906D79 /* Cells */,
+				2CADB81A22A600330044DC16 /* ViewController.swift */,
 				2CADB81C22A600330044DC16 /* Main.storyboard */,
 				2CADB82422A600380044DC16 /* LaunchScreen.storyboard */,
 				2CADB82722A600380044DC16 /* Info.plist */,
@@ -154,6 +157,14 @@
 				2CE7B92322A8AD7A00906D79 /* TableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		2CE7B93022A9F18900906D79 /* Ults */ = {
+			isa = PBXGroup;
+			children = (
+				2CE7B92E22A9F17B00906D79 /* extensions.swift */,
+			);
+			path = Ults;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -291,6 +302,7 @@
 				2CADB81B22A600330044DC16 /* ViewController.swift in Sources */,
 				2CE7B92522A8AD7A00906D79 /* TableViewCell.swift in Sources */,
 				2CADB81922A600330044DC16 /* AppDelegate.swift in Sources */,
+				2CE7B92F22A9F17B00906D79 /* extensions.swift in Sources */,
 				2CADB82122A600330044DC16 /* MesDemo.xcdatamodeld in Sources */,
 				2CADB84C22A605580044DC16 /* MessageTableViewCell.swift in Sources */,
 				2CADB84A22A6020A0044DC16 /* MessageModel.swift in Sources */,

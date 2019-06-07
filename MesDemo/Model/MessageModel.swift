@@ -9,16 +9,30 @@
 import Foundation
 import UIKit
 
+enum Position {
+    case alone
+    case first
+    case mid
+    case last
+}
+
+enum Sender {
+    case me
+    case friend
+}
+
 class Message {
     let content: String
-    let sender: Bool
+    let sender: Sender
     let attachment: UIImage?
     let date: Date
+    var position: Position = .alone
 
-    init(content: String, sender: Bool, attachment: UIImage?, date: Date) {
+    init(content: String, sender: Sender, attachment: UIImage?, date: Date, position: Position) {
         self.content = content
         self.sender = sender
         self.attachment = attachment
         self.date = date
+        self.position = position
     }
 }
