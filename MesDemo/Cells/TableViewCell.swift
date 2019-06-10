@@ -11,6 +11,7 @@ import UIKit
 class TableViewCell: UITableViewCell {
 
     @IBOutlet weak var bubbleImageView: UIImageView!
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var rightConstraint: NSLayoutConstraint!
     @IBOutlet weak var leftContraint: NSLayoutConstraint!
@@ -20,6 +21,7 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var toolBoxRightConstraint: NSLayoutConstraint!
     @IBOutlet weak var toolBoxLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var toolBox: UIView!
+    @IBOutlet weak var imageMessView: UIImageView!
 
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var editButton: UIButton!

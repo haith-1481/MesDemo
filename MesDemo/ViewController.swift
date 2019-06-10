@@ -32,7 +32,6 @@ class ViewController: UIViewController {
             guard let row = editingMessageID?.row else { return }
             guard let message = textField.text else { return }
             messageArray[row].content = message
-            textField.text = nil
             tableView.reloadRows(at: [IndexPath(row: row, section: 0)], with: UITableView.RowAnimation.none)
         } else {
             let rand = Int.random(in: 1...2)
@@ -42,8 +41,6 @@ class ViewController: UIViewController {
             let newMessage = Message(content: message, sender: sender, attachment: nil, date: Date(), position: .alone)
             let newMess = reposition(newMessage: newMessage)
             messageArray.append(newMess)
-            textField.text = nil
-            sendButton.isEnabled = false
 
             tableView.beginUpdates()
             tableView.reloadRows(at: [IndexPath(row: messageArray.count - 2, section: 0)], with: UITableView.RowAnimation.none)
@@ -52,6 +49,8 @@ class ViewController: UIViewController {
 
             tableView.scrollToRow(at: IndexPath(item: messageArray.count-1, section: 0), at: .bottom, animated: true)
         }
+        textField.text = nil
+        sendButton.isEnabled = false
     }
 
     override func viewDidLoad() {
@@ -69,9 +68,15 @@ class ViewController: UIViewController {
         
         let myMessage = Message(content: "OhioGozaimasu", sender: .friend, attachment: nil, date: Date(), position: .alone)
         let ppMessage = Message(content: "ArigatouGozaimasu", sender: .me, attachment: nil, date: Date(), position: .alone)
+        let imageMessage = Message(content: "", sender: .me, attachment: #imageLiteral(resourceName: "doge"), date: Date(), position: .alone)
+        let imageMessage1 = Message(content: "", sender: .friend, attachment: #imageLiteral(resourceName: "dogwitit"), date: Date(), position: .alone)
+        let imageMessage2 = Message(content: "", sender: .me, attachment: #imageLiteral(resourceName: "ic_doge"), date: Date(), position: .alone)
+
 
         messageArray.append(myMessage)
         messageArray.append(ppMessage)
+        messageArray.append(imageMessage)
+        messageArray.append(imageMessage1)
     }
 
     private func reposition(newMessage: Message) -> Message {
@@ -111,6 +116,12 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell") as? TableViewCell else { return UITableViewCell() }
         let message = messageArray[indexPath.row]
+        if message.attachment != nil {
+            let image = message.attachment
+            cell.imageMessView.image = image
+        } else {
+            cell.imageMessView.image = nil
+        }
         cell.setup(message: message)
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         cell.ediAction = { [weak self] in
