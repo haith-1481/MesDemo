@@ -22,7 +22,7 @@ enum Sender {
 }
 
 class Message {
-    let content: String
+    var content: String
     let sender: Sender
     let attachment: UIImage?
     let date: Date

@@ -17,11 +17,30 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var avaRightConstraint: NSLayoutConstraint!
     @IBOutlet weak var avaLeftConstraint: NSLayoutConstraint!
-    
+    @IBOutlet weak var toolBoxRightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var toolBoxLeftConstraint: NSLayoutConstraint!
+    @IBOutlet weak var toolBox: UIView!
+
+    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var editButton: UIButton!
+
+    var delAction: (() -> Void)?
+    var ediAction: (() -> Void)?
+
+    @IBAction func editAction(_ sender: Any) {
+        self.ediAction?()
+    }
+
+    @IBAction func DeleteAction(_ sender: Any) {
+        self.delAction?()
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
+
+    var toolBoxIsHidden = true
 
     func setup(message: Message) {
         messageLabel.text = message.content
@@ -29,6 +48,7 @@ class TableViewCell: UITableViewCell {
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         bubbleImageView.translatesAutoresizingMaskIntoConstraints = false
         bubbleImageView.contentMode = .scaleToFill
+        toolBox.isHidden = toolBoxIsHidden
         if message.position == .alone || message.position == .first {
             avatarImageView.isHidden = false
             avatarImageView.setRounded()
@@ -57,6 +77,8 @@ class TableViewCell: UITableViewCell {
             avatarImageView.image = #imageLiteral(resourceName: "Cat")
             avaLeftConstraint.priority = UILayoutPriority(rawValue: 201)
             avaRightConstraint.priority = UILayoutPriority(rawValue: 200)
+            toolBoxLeftConstraint.priority = UILayoutPriority(rawValue: 201)
+            toolBoxRightConstraint.priority = UILayoutPriority(rawValue: 200)
         } else {
              //sent
             switch message.position {
@@ -77,6 +99,8 @@ class TableViewCell: UITableViewCell {
             avatarImageView.image = #imageLiteral(resourceName: "Owl")
             avaLeftConstraint.priority = UILayoutPriority(rawValue: 200)
             avaRightConstraint.priority = UILayoutPriority(rawValue: 201)
+            toolBoxLeftConstraint.priority = UILayoutPriority(rawValue: 200)
+            toolBoxRightConstraint.priority = UILayoutPriority(rawValue: 201)
         }
         print("\(message.position)" + " ," + "\(message.sender)")
     }

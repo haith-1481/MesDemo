@@ -11,6 +11,8 @@ import UIKit
 class ViewController: UIViewController {
 
     var messageArray = [Message]()
+    var isEditingMessage = false
+    var editingMessageID: IndexPath?
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var textField: UITextField!
@@ -25,22 +27,31 @@ class ViewController: UIViewController {
     }
 
     @IBAction func sendAction(_ sender: Any) {
-        let rand = Int.random(in: 1...2)
-        var sender: Sender = .me
-        if rand == 2 { sender = .friend }
-        guard let message = textField.text else { return }
-        let newMessage = Message(content: message, sender: sender, attachment: nil, date: Date(), position: .alone)
-        let newMess = reposition(newMessage: newMessage)
-        messageArray.append(newMess)
-        textField.text = nil
-        sendButton.isEnabled = false
-    
-        tableView.beginUpdates()
-        tableView.reloadRows(at: [IndexPath(row: messageArray.count - 2, section: 0)], with: UITableView.RowAnimation.none)
-        tableView.insertRows(at: [IndexPath(row: messageArray.count - 1, section: 0)], with: .automatic)
-        tableView.endUpdates()
+        if isEditingMessage {
+            isEditingMessage = false
+            guard let row = editingMessageID?.row else { return }
+            guard let message = textField.text else { return }
+            messageArray[row].content = message
+            textField.text = nil
+            tableView.reloadRows(at: [IndexPath(row: row, section: 0)], with: UITableView.RowAnimation.none)
+        } else {
+            let rand = Int.random(in: 1...2)
+            var sender: Sender = .me
+            if rand == 2 { sender = .friend }
+            guard let message = textField.text else { return }
+            let newMessage = Message(content: message, sender: sender, attachment: nil, date: Date(), position: .alone)
+            let newMess = reposition(newMessage: newMessage)
+            messageArray.append(newMess)
+            textField.text = nil
+            sendButton.isEnabled = false
 
-        tableView.scrollToRow(at: IndexPath(item: messageArray.count-1, section: 0), at: .bottom, animated: true)
+            tableView.beginUpdates()
+            tableView.reloadRows(at: [IndexPath(row: messageArray.count - 2, section: 0)], with: UITableView.RowAnimation.none)
+            tableView.insertRows(at: [IndexPath(row: messageArray.count - 1, section: 0)], with: .automatic)
+            tableView.endUpdates()
+
+            tableView.scrollToRow(at: IndexPath(item: messageArray.count-1, section: 0), at: .bottom, animated: true)
+        }
     }
 
     override func viewDidLoad() {
@@ -75,6 +86,21 @@ class ViewController: UIViewController {
         }
         return newMessage
     }
+
+    private func doSelectAll(id: Int) {
+        let totalRows = tableView.numberOfRows(inSection: 0)
+        for row in 0..<totalRows where row != id {
+            guard let cell:TableViewCell = tableView.cellForRow(at: NSIndexPath(row: row, section: 0) as IndexPath) as? TableViewCell else { return }
+            cell.toolBoxIsHidden = true
+            cell.toolBox.isHidden = cell.toolBoxIsHidden
+        }
+    }
+
+    func removeCellAt(id: IndexPath) {
+        print(id.row)
+        tableView.deleteRows(at: [id], with: .fade)
+        tableView.reloadData()
+    }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
@@ -87,11 +113,25 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let message = messageArray[indexPath.row]
         cell.setup(message: message)
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        cell.ediAction = { [weak self] in
+            guard let `self` = self else { return }
+            self.textField.text = message.content
+            self.isEditingMessage = true
+            self.editingMessageID = indexPath
+        }
+        cell.delAction = { [weak self] in
+            guard let `self` = self else { return }
+            self.messageArray.remove(at: indexPath.row)
+            self.removeCellAt(id: indexPath)
+        }
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //Change the selected background view of the cell.
+        guard let cell:TableViewCell = tableView.cellForRow(at: indexPath) as? TableViewCell else { return }
+        cell.toolBoxIsHidden.toggle()
+        cell.toolBox.isHidden = cell.toolBoxIsHidden
+        doSelectAll(id: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: false)
     }
 
